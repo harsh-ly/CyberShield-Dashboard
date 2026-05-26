@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CyberShield — Password Security Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Animated grid background -->
+  <div class="grid-bg"></div>
+  <div class="scan-line"></div>
+
+  <!-- ── SIDEBAR ───────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 40 40" fill="none">
+          <path d="M20 2L4 9v12c0 9.4 6.8 18.2 16 20.4C29.2 39.2 36 30.4 36 21V9L20 2z" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+          <path d="M14 20l4 4 8-8" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-name">CYBERSHIELD</div>
+        <div class="logo-sub">SECURITY SYSTEM v2.0</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-tab="dashboard">
+        <span class="nav-icon">◈</span><span>Dashboard</span>
+        <span class="nav-badge">LIVE</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="analyzer">
+        <span class="nav-icon">⬡</span><span>Analyzer</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="encrypt">
+        <span class="nav-icon">◉</span><span>Encryption</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="generator">
+        <span class="nav-icon">◎</span><span>Generator</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="history">
+        <span class="nav-icon">◧</span><span>History</span>
+      </a>
+      <a href="#" class="nav-item" data-tab="login">
+        <span class="nav-icon">◫</span><span>Login Sim</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-row">
+        <span class="pulse-dot"></span>
+        <span>System Online</span>
+      </div>
+      <div class="sidebar-version">BUILD 2026.05</div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ──────────────────── -->
+  <main class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <div class="breadcrumb">
+          <span class="bc-root">CYBERSHIELD</span>
+          <span class="bc-sep">/</span>
+          <span class="bc-current" id="breadcrumbCurrent">DASHBOARD</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-clock" id="clock">00:00:00</div>
+        <div class="threat-level">
+          <span class="tl-label">THREAT LVL</span>
+          <div class="tl-bars">
+            <span class="tl-bar active"></span>
+            <span class="tl-bar active"></span>
+            <span class="tl-bar active"></span>
+            <span class="tl-bar"></span>
+            <span class="tl-bar"></span>
+          </div>
+        </div>
+        <div class="avatar">CS</div>
+      </div>
+    </header>
+
+    <!-- ── TAB: DASHBOARD ──────────────── -->
+    <section class="tab-content active" id="tab-dashboard">
+      <div class="page-header">
+        <h1 class="page-title">SECURITY OVERVIEW</h1>
+        <p class="page-sub">Real-time password security intelligence platform</p>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="stat-grid">
+        <div class="stat-card" style="--delay:0s">
+          <div class="stat-icon">🔐</div>
+          <div class="stat-body">
+            <div class="stat-val" id="stat-analyzed">0</div>
+            <div class="stat-lbl">Passwords Analyzed</div>
+          </div>
+          <div class="stat-trend up">+12%</div>
+        </div>
+        <div class="stat-card" style="--delay:.08s">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-body">
+            <div class="stat-val" id="stat-generated">0</div>
+            <div class="stat-lbl">Passwords Generated</div>
+          </div>
+          <div class="stat-trend up">+8%</div>
+        </div>
+        <div class="stat-card" style="--delay:.16s">
+          <div class="stat-icon">🚨</div>
+          <div class="stat-body">
+            <div class="stat-val" id="stat-breached">0</div>
+            <div class="stat-lbl">Breaches Detected</div>
+          </div>
+          <div class="stat-trend down">-3%</div>
+        </div>
+        <div class="stat-card" style="--delay:.24s">
+          <div class="stat-icon">🛡</div>
+          <div class="stat-body">
+            <div class="stat-val" id="stat-score">—</div>
+            <div class="stat-lbl">Last Strength Score</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle row -->
+      <div class="mid-grid">
+        <!-- Strength Gauge -->
+        <div class="panel gauge-panel">
+          <div class="panel-hdr">STRENGTH METER</div>
+          <div class="gauge-wrap">
+            <svg class="gauge-svg" viewBox="0 0 200 120">
+              <path d="M20,110 A90,90 0 0,1 180,110" fill="none" stroke="#1a1a2e" stroke-width="18" stroke-linecap="round"/>
+              <path id="gaugeArc" d="M20,110 A90,90 0 0,1 180,110" fill="none" stroke="var(--accent)" stroke-width="18" stroke-linecap="round" stroke-dasharray="0 283"/>
+              <text x="100" y="100" text-anchor="middle" class="gauge-num" id="gaugeNum">0%</text>
+              <text x="100" y="116" text-anchor="middle" class="gauge-label" id="gaugeLabel">NO INPUT</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Quick Analyze -->
+        <div class="panel analyze-panel">
+          <div class="panel-hdr">QUICK ANALYZE</div>
+          <div class="qa-input-wrap">
+            <input type="password" id="qaInput" class="qa-input" placeholder="Type password to analyze…" oninput="quickAnalyze()" />
+            <button class="qa-eye" onclick="toggleQaVis()" id="qaEye">👁</button>
+          </div>
+          <div class="meter-track">
+            <div class="meter-fill" id="meterFill"></div>
+          </div>
+          <div class="qa-metrics">
+            <div class="qm"><span id="qm-len">0</span><small>Length</small></div>
+            <div class="qm"><span id="qm-ent">0</span><small>Entropy</small></div>
+            <div class="qm"><span id="qm-typ">0</span><small>Char Types</small></div>
+            <div class="qm"><span id="qm-crack">—</span><small>Crack Est.</small></div>
+          </div>
+          <div id="qa-breach" class="qa-breach hidden"></div>
+          <div id="qa-suggestions" class="qa-suggestions"></div>
+        </div>
+
+        <!-- Encryption Panel -->
+        <div class="panel enc-quick-panel">
+          <div class="panel-hdr">ENCRYPTION LAB</div>
+          <div class="enc-modes">
+            <button class="enc-mode-btn active" onclick="setMode(this,'caesar')">ROT-13</button>
+            <button class="enc-mode-btn" onclick="setMode(this,'xor')">XOR</button>
+            <button class="enc-mode-btn" onclick="setMode(this,'base64')">BASE64</button>
+          </div>
+          <textarea id="encInput" class="enc-textarea" placeholder="Enter text to encrypt…" rows="3"></textarea>
+          <div class="enc-actions">
+            <button class="btn-cyber btn-sm" onclick="doEncrypt()">⚡ ENCRYPT</button>
+            <button class="btn-cyber btn-sm btn-ghost" onclick="doDecrypt()">🔓 DECRYPT</button>
+          </div>
+          <div class="enc-out-label">OUTPUT</div>
+          <div class="enc-output" id="encOutput">—</div>
+          <button class="copy-btn" onclick="copyEnc()">COPY ⧉</button>
+        </div>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="bot-grid">
+        <!-- Generator -->
+        <div class="panel gen-panel">
+          <div class="panel-hdr">PASSWORD GENERATOR</div>
+          <div class="gen-opts">
+            <label class="gen-chk"><input type="checkbox" id="gUp" checked onchange="genPreview()"> A–Z</label>
+            <label class="gen-chk"><input type="checkbox" id="gLo" checked onchange="genPreview()"> a–z</label>
+            <label class="gen-chk"><input type="checkbox" id="gNum" checked onchange="genPreview()"> 0–9</label>
+            <label class="gen-chk"><input type="checkbox" id="gSym" checked onchange="genPreview()"> !@#</label>
+          </div>
+          <div class="gen-len-row">
+            <span class="gen-len-lbl">LEN</span>
+            <input type="range" id="genLen" min="8" max="48" value="16" oninput="this.nextElementSibling.textContent=this.value;genPreview()" class="gen-slider" />
+            <span class="gen-len-val">16</span>
+          </div>
+          <div class="gen-output-wrap">
+            <div class="gen-output" id="genOutput">Click GENERATE</div>
+            <button class="gen-regen" onclick="genPreview()" title="Regenerate">↻</button>
+          </div>
+          <div class="gen-actions">
+            <button class="btn-cyber" onclick="genPreview()">⚡ GENERATE</button>
+            <button class="btn-cyber btn-ghost" onclick="copyGen()">COPY ⧉</button>
+            <button class="btn-cyber btn-ghost" onclick="useGenerated()">→ ANALYZE</button>
+          </div>
+        </div>
+
+        <!-- History -->
+        <div class="panel hist-panel">
+          <div class="panel-hdr">RECENT HISTORY
+            <button class="clear-hist-btn" onclick="clearHistory()">CLEAR</button>
+          </div>
+          <div class="hist-list" id="histList">
+            <div class="hist-empty">No passwords analyzed yet.</div>
+          </div>
+        </div>
+
+        <!-- Login Sim -->
+        <div class="panel login-panel">
+          <div class="panel-hdr">LOGIN SIMULATION</div>
+          <div class="login-info">Passwords hashed with SHA-256 — never stored in plain text.</div>
+          <input type="text" id="lUser" class="login-input" placeholder="Username" />
+          <input type="password" id="lPass" class="login-input" placeholder="Password" />
+          <button class="btn-cyber" style="width:100%; margin-top:10px" onclick="doLogin()">⚡ SIGN IN / REGISTER</button>
+          <div class="login-result hidden" id="loginResult"></div>
+          <div class="login-hash-wrap hidden" id="loginHashWrap">
+            <div class="login-hash-lbl">SHA-256 HASH</div>
+            <div class="login-hash" id="loginHash"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
